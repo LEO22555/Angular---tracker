@@ -24,4 +24,19 @@ describe('TransactionsService', () => {
       done();
     });
   });
+
+  it('should get the right type of a transaction', (done) => {
+    service.get().subscribe((transactions: Transaction[]) => {
+      const transaction: Transaction = transactions[3];
+      expect(transaction.type).toBe('income');
+      done();
+    });
+  });
+
+  it('should have the right amount', (done) => {
+    service.getById('jrtupEp').subscribe((transaction: Transaction) => {
+      expect(transaction.amount).toBe(200);
+      done();
+    });
+  });
 });
